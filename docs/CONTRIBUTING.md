@@ -61,7 +61,7 @@ We follow the **GitHub Flow**:
   - Indent with **2 spaces**, not tabs.  
   - Quote variables: `"$var"`.  
   - Limit line length to 80 characters where possible.
-  - Prefer to use func4bash functions.
+  - Prefer to use functions under `extra/`.
 
 ---
 

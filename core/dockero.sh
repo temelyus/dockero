@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-trap 'echo "[ERROR] Unexpected failure on line $LINENO."' ERR
-
 # === Project Root Detection ===
 CORE_DIR="$(dirname $0)"
 COMMANDS_DIR="${CORE_DIR}/core/commands"
 [[ "$0" =~ "core/" ]] && COMMANDS_DIR="${CORE_DIR}/commands"
 
 # === sources ===
-source ${CORE_DIR}/func4bash/log.lib
-source ${CORE_DIR}/func4bash/inipars.lib
+source ${CORE_DIR}/extra/log.sh
+source ${CORE_DIR}/extra/inipars.sh
 source ${CORE_DIR}/parameter-indexing.sh
 parameter-indexing $@
 
