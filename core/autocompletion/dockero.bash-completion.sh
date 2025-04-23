@@ -9,7 +9,7 @@ _dockero_autocomplete() {
 
   if [[ $COMP_CWORD -eq 1 ]]; then
     COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
-  elif [[ "$prev" =~ ("run"|"rename"|"setup"|"start"|"export"|"remove") ]]; then
+  elif [[ "$prev" =~ ("run"|"rename"|"start"|"export"|"remove") ]]; then
     containers=$(docker ps -as --format "{{.Names}}")
     COMPREPLY=( $(compgen -W "${containers}" -- ${cur}) )
   elif [[ "$prev" =~ ("stop") ]]; then

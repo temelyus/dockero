@@ -62,7 +62,7 @@ function log.setline() {
     # Get the size of the terminal
     local half=""
     local info=""
-    ! [[ -z $1 ]] && info="/${COLOR_GENERIC}$1${RESET_COLOR}\\ ⚜️  "
+    [[ -n $1 ]] && info="/${COLOR_GENERIC}$1${RESET_COLOR}\\ ⚜️  "
     for ((i=1; i<=$(( columns - ${#info} )); i++)); do
         half+="-"
     done
@@ -74,7 +74,7 @@ function log.endline() {
     # Get the size of the terminal
     local half=""
     local info=""
-    ! [[ -z $1 ]] && info="\\\\${COLOR_GENERIC}$1${RESET_COLOR}/ ⚜️  "
+    [[ -n $1 ]] && info="\\\\${COLOR_GENERIC}$1${RESET_COLOR}/ ⚜️  "
     for ((i=1; i<=$(( columns - ${#info} )); i++)); do
         half+="-"
     done
