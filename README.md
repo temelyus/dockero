@@ -79,7 +79,7 @@ port = 8080:80
 
 We welcome contributors. Fork the repo, make your changes, and open a PR.
 
-- 📄 Read our [docs/CONTRIBUTING.md](CONTRIBUTING.md)
+- 📄 Read our [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 - 📢 Join the discussion on [Discord](https://discord.gg/PXQQdpKNdc)
 
 ---
