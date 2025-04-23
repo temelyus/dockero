@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
 # === Project Root Detection ===
-CORE_DIR="$(dirname $0)"
-COMMANDS_DIR="${CORE_DIR}/core/commands"
-[[ "$0" =~ "core/" ]] && COMMANDS_DIR="${CORE_DIR}/commands"
+if [ -L $0 ] ; then
+    CORE_DIR=$(dirname $(readlink -f $0)) ;
+else
+    CORE_DIR=$(dirname $0) ;
+fi ;
+COMMANDS_DIR="${CORE_DIR}/commands"
 
 # === sources ===
 source ${CORE_DIR}/extra/log.sh
