@@ -14,7 +14,6 @@ setup() {
     fi
 
     # Parse .dockero configuration
-    local name image data port command
     name=$(inipars.get "default" "name")
     image=$(inipars.get "default" "image")
     command=$(inipars.get "default" "command")
@@ -47,13 +46,21 @@ setup() {
     fi
 
     # Set defaults and run container
-    local volume_mount="${data:-$project_path:/workspace}"
-    local port_mapping="${port:-80}"
+    volume_mount="${data:-$project_path:/workspace}"
+    port_mapping="${port:-80}"
 
     log.info "Launching container: $name"
-    docker run -it \
-        -v "$volume_mount" \
-        -p "$port_mapping" \
-        --name "$name" \
-        "$image" ${command:+bash -c "$command"}
+    docker_run
+}
+docker_run() {
+  docker run -it \
+  $( [ -e /dev/snd ] && echo "--device /dev/snd" ) \
+  $( [ -n "$DISPLAY" ] && echo "-e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix" ) \
+  $( [ -n "$WAYLAND_DISPLAY" ] && [ -e /run/user/$(id -u)/wayland-0 ] && echo "-e WAYLAND_DISPLAY=$WAYLAND_DISPLAY -v /run/user/$(id -u)/wayland-0:/run/user/$(id -u)/wayland-0" ) \
+  $( [ -d /run/user/$(id -u)/pulse ] && echo "-v /run/user/$(id -u)/pulse:/run/user/$(id -u)/pulse -e PULSE_SERVER=unix:/run/user/$(id -u)/pulse/native" ) \
+  $( command -v nvidia-smi >/dev/null 2>&1 && echo "--gpus all" ) \
+  -v "$volume_mount" \
+  -p "$port_mapping" \
+  --name "${name}" \
+  "$image" ${command:+bash -c "$command"}
 }

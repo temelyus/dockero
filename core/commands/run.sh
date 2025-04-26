@@ -8,6 +8,12 @@ run() {
   container_name=${args[1]}
   image_name=${args[2]:-"${args[1]}"}
 
+  if [[ "$image_name" != *:* ]]; then
+    search_name="$image_name:latest"
+  else
+    search_name="$image_name"
+  fi
+
   # Check if container exists
   log.setline "$container_name"
 
@@ -15,7 +21,7 @@ run() {
     docker start -ai "$container_name"
     log.endline "$container_name"
     return 0
-  elif docker images --format '{{.Repository}}:{{.Tag}}' | grep -q "^$image_name$"; then
+  elif docker images --format '{{.Repository}}:{{.Tag}}' | grep -q "^$search_name$"; then
     log.sub "Creating new container from image: $image_name"
   else
     log.warn "Image and Container not found. Pulling: $image_name"
