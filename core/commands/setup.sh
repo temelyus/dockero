@@ -19,11 +19,13 @@ setup() {
     command=$(inipars.get "default" "command")
     data=$(inipars.get "volumes" "data")
     port=$(inipars.get "volumes" "port")
+
     if [[ "$image" != *:* ]]; then
         search_image="$image:latest"
     else
         search_image="$image"
     fi
+
     # Validate required fields
     if [[ -z "$name" || -z "$image" ]]; then
         log.error "Missing required fields in $CONF_FILE: 'name' or 'image'"
@@ -32,18 +34,18 @@ setup() {
 
     # Check container name if avaible
     if docker ps -a --format '{{.Names}}' | grep -q "^$name$"; then
-        log.error "The container name "/mynode" is already in use"
+        log.error "The container name "$name" is already in use"
         return 1
     fi
 
     log.setline "$name"
 
     # Pull image if not available locally
-    if ! docker images --format '{{.Repository}}:{{.Tag}}' | grep -q "^$search_name$"; then
+    if ! docker images --format '{{.Repository}}:{{.Tag}}' | grep -q "^$search_image$"; then
         if docker pull "$image" > "/tmp/$image.pull.log" 2>&1; then
             log.done "$image pulled successfully."
         else
-            log.error "Failed to pull image: $image"
+            log.error "Failed to pull image: $image"    
             log.sub "Check log: /tmp/$image.pull.log"
             return 1
         fi
