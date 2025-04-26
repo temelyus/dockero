@@ -15,6 +15,7 @@ log.sub "dockero stop     <container> --time <second>    Stop a container with p
 log.sub "dockero setup    <project path>                 Setup a container for project."
 log.sub "dockero start    <container> -c <command>       Start a container with provided command."
 log.sub "dockero export   <container name>               Export container as .tar."
+log.sub "dockero import   </path/to/.tar>                Import tar file as image."
 log.sub "dockero rename   <container> <new name>         Rename container."
 log.sub "dockero remove   <container:image> [more...]    Remove container or image"
 
@@ -61,6 +62,13 @@ help-export(){
 echo "
 💠 dockero export <container name>
   🔹 export exist container as .tar file to $HOME
+"
+}
+
+help-import(){
+echo "
+💠 dockero import </path/to/.tar>
+  🔹 load tar file as image
 "
 }
 
