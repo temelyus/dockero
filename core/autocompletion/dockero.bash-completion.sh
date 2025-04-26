@@ -1,21 +1,33 @@
 #!/usr/bin/env bash
 
 _dockero_autocomplete() {
-  local cur prev opts containers
+  local cur prev opts containers tar_files
   COMPREPLY=()
   cur="${COMP_WORDS[COMP_CWORD]}"
   prev="${COMP_WORDS[COMP_CWORD-1]}"
-  opts="run list stop start export rename setup remove --help --version"
+  opts="run list stop start export import rename setup remove --help --version"
 
-  if [[ $COMP_CWORD -eq 1 ]]; then
-    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
-  elif [[ "$prev" =~ ("run"|"rename"|"start"|"export"|"remove") ]]; then
-    containers=$(docker ps -as --format "{{.Names}}")
-    COMPREPLY=( $(compgen -W "${containers}" -- ${cur}) )
-  elif [[ "$prev" =~ ("stop") ]]; then
-    containers=$(docker ps --filter "status=running" --format '{{.Names}}')
-    COMPREPLY=( $(compgen -W "${containers}" -- ${cur}) )
-  fi
+  case $COMP_CWORD in
+    1)
+      COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+      ;;
+    *)
+      case "$prev" in
+        run|rename|start|export|remove)
+          containers=$(docker ps -as --format "{{.Names}}" 2>/dev/null)
+          COMPREPLY=( $(compgen -W "${containers}" -- "${cur}") )
+          ;;
+        stop)
+          containers=$(docker ps --filter "status=running" --format "{{.Names}}" 2>/dev/null)
+          COMPREPLY=( $(compgen -W "${containers}" -- "${cur}") )
+          ;;
+        import)
+          tar_files=$(find . -maxdepth 1 -type f -name "*.tar" -printf "%f\n" 2>/dev/null)
+          COMPREPLY=( $(compgen -W "${tar_files}" -- "${cur}") )
+          ;;
+      esac
+      ;;
+  esac
 }
 
 complete -F _dockero_autocomplete dockero
