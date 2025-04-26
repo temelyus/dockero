@@ -39,7 +39,7 @@ setup() {
     log.setline "$name"
 
     # Pull image if not available locally
-    if ! docker images --format '{{.Repository}}' | grep -q "^$search_image$"; then
+    if ! docker images --format '{{.Repository}}:{{.Tag}}' | grep -q "^$search_name$"; then
         if docker pull "$image" > "/tmp/$image.pull.log" 2>&1; then
             log.done "$image pulled successfully."
         else
