@@ -1,5 +1,5 @@
 setup() {
-    [[ -z "${args[1]}" ]] && log.hint "setup <project path>" && return 1
+    [[ -z "${args[1]}" ]] && log.hint "setup <project-path>" && return 1
 
     local project_path="${args[1]}"
     [[ "$project_path" != /* ]] && project_path="$PWD/$project_path"

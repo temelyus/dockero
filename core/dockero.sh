@@ -10,6 +10,7 @@ COMMANDS_DIR="${CORE_DIR}/commands"
 
 # === sources ===
 source ${CORE_DIR}/extra/log.sh
+source ${CORE_DIR}/extra/colors.sh
 source ${CORE_DIR}/extra/inipars.sh
 source ${CORE_DIR}/parameter-indexing.sh
 parameter-indexing $@

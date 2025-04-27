@@ -3,7 +3,7 @@ set -e
 
 # === INPUT VALIDATION ===
 if [[ ! -n "${args[1]}" ]]; then
-  log.hint "Usage: $0 export <container_name>"
+  log.hint "Usage: $0 export <container-name>"
   exit 1
 fi
 

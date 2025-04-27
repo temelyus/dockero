@@ -1,5 +1,5 @@
 import() {
-    [[ -z "${args[1]}" ]] && log.hint "import </path/to/.tar>" && return 1
+    [[ -z "${args[1]}" ]] && log.hint "import </path/to/archive.tar>" && return 1
     [[ -n "${params[*]}" ]] && log.warn "import command cannot accept parameters!" && return 1
 
     local tar_file="${args[1]}"
