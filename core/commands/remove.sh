@@ -2,7 +2,7 @@ remove() {
   local targets=("${full_arr[@]:1}")
 
   if [[ ${#targets[@]} -eq 0 ]]; then
-    log.hint "Usage: remove <container:image> [more...]"
+    log.hint "Usage: remove <container|image> [additional]"
     return 1
   fi
 

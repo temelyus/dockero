@@ -1,7 +1,7 @@
 start() {
 
   [[ "${full_arr[1]}" =~ ^"-" ]] && log.warn "You cannot set paramter before container!" && return 1
-  [[ -z "${args[1]}" ]] && log.hint "start <container> -c <command>" && return 1
+  [[ -z "${args[1]}" ]] && log.hint "start <container> [-c <command>]" && return 1
 
   local container_name=${args[1]}
   log.setline "$container_name"
