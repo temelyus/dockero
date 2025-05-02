@@ -1,8 +1,0 @@
-[default]
-name = mydebian
-image = debian:latest
-command = echo hello from debian
-
-[volumes]
-data = /opt/mydebian:/workspace
-port = 8080:80

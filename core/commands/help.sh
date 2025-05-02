@@ -12,7 +12,7 @@ Usage 🪬 :"
 log.sub "dockero run      ${YELLOW}<name> [<image>]                 ${RESET_COLOR}Run an existing container or create a new one."
 log.sub "dockero list     ${YELLOW}[img | --img <name>]             ${RESET_COLOR}List containers or images."
 log.sub "dockero stop     ${YELLOW}<container> [--time <seconds>]   ${RESET_COLOR}Stop a container with an optional delay."
-log.sub "dockero setup    ${YELLOW}<project-path>                   ${RESET_COLOR}Set up a containerized environment for a project."
+log.sub "dockero setup    ${YELLOW}<project-path>                   ${RESET_COLOR}Set up a containerized environment for a project. (.dockero)"
 log.sub "dockero start    ${YELLOW}<container> [-c <command>]       ${RESET_COLOR}Start a container, optionally with a custom command."
 log.sub "dockero export   ${YELLOW}<container-name>                 ${RESET_COLOR}Export a container as a .tar archive to \$HOME."
 log.sub "dockero import   ${YELLOW}</path/to/archive.tar>           ${RESET_COLOR}Import a .tar archive as a container image."
@@ -110,14 +110,18 @@ echo "
   🔹 'PORT' sets the external port mapping for the container.
   🔹 'VPATH' and 'PORT' entries are optional.
 
-  [default]
-  name = mydebian
-  image = debian:latest
-  command = echo hello from debian
+[default]
+name = mynginx
+image = nginx:alpine
+command = nginx -g 'daemon off;'
+restart_policy = always
 
-  [volumes]
-  data = /opt/mydebian:/workspace
-  port = 8080:80
+[volumes]
+env = ./nginx:/usr/share/nginx/html
+port = 8080:80
+
+[user]
+name = root
 "
 }
 
