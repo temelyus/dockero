@@ -23,7 +23,6 @@ setup() {
 
     # Read user info (if present)
     user_name=$(inipars.get "user" "name")
-    user_uid=$(inipars.get "user" "uid")
     user_gid=$(inipars.get "user" "gid")
 
     if [[ "$image" != *:* ]]; then
@@ -62,13 +61,12 @@ setup() {
     port_mapping="${port:-80}"
 
     log.info "Launching container: $name"
-    docker_run "$user_name" "$user_uid" "$user_gid"
+    docker_run "$user_name" "$user_gid"
 }
 
 docker_run() {
     local user_name="$1"
-    local user_uid="$2"
-    local user_gid="$3"
+    local user_gid="$2"
 
     docker run -it \
     $( [ -e /dev/snd ] && echo "--device /dev/snd" ) \

@@ -10,5 +10,4 @@ port = 5432:5432
 
 [user]
 name = postgres
-uid = 1000
 gid = 1000
