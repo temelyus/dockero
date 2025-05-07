@@ -29,20 +29,20 @@ function log() {
     local color="$2"
     local message="$3"
 
-    echo -e "${RESET_COLOR}[${color}$level${RESET_COLOR}]${color} - ${RESET_COLOR} $message"
+    echo -e "${color}$level - ${RESET_COLOR} $message"
 }
 
 # Log levels
 function log.info() {
-    log "💠 INFO " "$COLOR_INFO" "$1"
+    log "💠 INFO " "$COLOR_INFO" "$1" 
 }
 
 function log.warn() {
-    log "⚠️  WARN " "$COLOR_WARN" "$1"
+    log "⚠️  WARN " "$COLOR_WARN" "$1" 
 }
 
 function log.error() {
-    log "❌ ERROR" "$COLOR_ERROR" "$1"
+    log "❌ ERROR" "$COLOR_ERROR" "$1" 
 }
 
 function log.done() {

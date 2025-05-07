@@ -24,7 +24,7 @@ rename() {
             return 1
         fi
     else
-        log.hint "Usage: rename <name> <new name>"
+        log.hint "Usage: rename <current-name> <new-name>"
         return 1
     fi
 }

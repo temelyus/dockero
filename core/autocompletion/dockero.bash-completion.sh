@@ -25,6 +25,9 @@ _dockero_autocomplete() {
           tar_files=$(find . -maxdepth 1 -type f -name "*.tar" -printf "%f\n" 2>/dev/null)
           COMPREPLY=( $(compgen -W "${tar_files}" -- "${cur}") )
           ;;
+        list)
+          COMPREPLY=( $(compgen -W "img" -- "${cur}") )
+          ;;
       esac
       ;;
   esac
