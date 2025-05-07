@@ -1,3 +1,5 @@
+<img width="96" align="right" src="https://the-abra.github.io/images/dockero.png" alt="ICON">
+
 # 🚀 Dockero – Simplified Docker CLI with Autocompletion
 
 **Dockero** is a lightweight, Bash-based CLI enhancement layer for Docker. It streamlines container workflows with memorable commands, rich logging, autocompletion, and project configuration support — built by developers, for developers.
