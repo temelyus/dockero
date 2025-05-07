@@ -33,13 +33,15 @@ run() {
 
 docker_run() {
   docker run -it \
-  $( [ -e /dev/snd ] && echo "--device /dev/snd" ) \
-  $( [ -n "$DISPLAY" ] && echo "-e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix" ) \
-  $( [ -n "$WAYLAND_DISPLAY" ] && [ -e /run/user/$(id -u)/wayland-0 ] && echo "-e WAYLAND_DISPLAY=$WAYLAND_DISPLAY -v /run/user/$(id -u)/wayland-0:/run/user/$(id -u)/wayland-0" ) \
-  $( [ -d /run/user/$(id -u)/pulse ] && echo "-v /run/user/$(id -u)/pulse:/run/user/$(id -u)/pulse -e PULSE_SERVER=unix:/run/user/$(id -u)/pulse/native" ) \
-  $( command -v nvidia-smi >/dev/null 2>&1 && echo "--gpus all" ) \
-  -v /opt/${container_name}:/workspace \
-  -p 80 \
-  --name "${container_name}" \
-  "$image_name"
+    -v /opt/${container_name}:/workspace \
+    -p 80 \
+    --name "${container_name}" \
+    $( [ -e /dev/snd ] && echo "--device /dev/snd" ) \
+    $( [ -n "$DISPLAY" ] && echo "-e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix" ) \
+    $( [ -n "$WAYLAND_DISPLAY" ] && echo "-e WAYLAND_DISPLAY=$WAYLAND_DISPLAY -v $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:/tmp/xdg/$WAYLAND_DISPLAY -e XDG_RUNTIME_DIR=/tmp/xdg" ) \
+    $( [ -d /run/user/$(id -u)/pulse ] && echo "-v /run/user/$(id -u)/pulse:/run/user/$(id -u)/pulse -e PULSE_SERVER=unix:/run/user/$(id -u)/pulse/native" ) \
+    $( command -v nvidia-smi >/dev/null 2>&1 && echo "--gpus all" ) \
+    -v /run/user/$(id -u)/bus:/run/user/$(id -u)/bus \
+    "$image_name"
 }
+

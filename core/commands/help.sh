@@ -100,30 +100,46 @@ echo "
 "
 }
 
-help-setup(){
-echo "
+help-setup() {
+cat <<EOF
+
+🔧 Dockero Setup Utility
+
+Usage:
+
 💠 dockero setup <project-path>
-  🔹 Create and configure a container for your project.
-  🔹 A valid .dockero configuration file must exist at the project path.
+  ▸ Initializes and provisions a container environment based on the provided project path.
+  ▸ Requires a valid \`.dockero\` configuration file located at <project-path>.
 
-💠 .dockero file format example
-  🔹 'PORT' sets the external port mapping for the container.
-  🔹 'VPATH' and 'PORT' entries are optional.
+📄 .dockero Configuration File Format
 
-[default]
-name = mynginx
-image = nginx:alpine
-command = nginx -g 'daemon off;'
-restart_policy = always
+🔹 port  
+   ▸ Defines the host-to-container port mapping (e.g., 8080:80).  
+   ▸ Optional.
 
-[volumes]
-env = ./nginx:/usr/share/nginx/html
-port = 8080:80
+🔹 env  
+   ▸ Declares volume mappings in the format '<host_path>:<container_path>'.  
+   ▸ Defaults to '\$PWD:/workspace' if not explicitly specified.  
+   ▸ Optional.
 
-[user]
-name = root
-"
+📌 Example Configuration:
+
+[default]  
+name = mynginx  
+image = nginx:alpine  
+command = nginx -g 'daemon off;'  
+restart_policy = always  
+
+[volumes]  
+env = ./nginx:/usr/share/nginx/html  
+port = 8080:80  
+
+[user]  
+name = root  
+
+EOF
 }
+
 
 help-remove(){
 echo "
