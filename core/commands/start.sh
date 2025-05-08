@@ -11,7 +11,6 @@ start() {
     docker start "$container_name"
     if [[ -n ${args[2]} && -n "${params[c]+set}" ]]; then
         docker exec -it "$container_name" "${full_arr[@]:3}"
-        docker stop --time=1 "$container_name"
     fi
     return 0
   else

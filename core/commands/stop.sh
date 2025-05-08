@@ -1,10 +1,10 @@
 stop() {
   [[ "${full_arr[1]}" =~ ^"-" ]] && log.warn "You cannot set paramter before container!" && return 1
-  [[ -z "${args[1]}" ]] && log.hint "stop <container> [--time <second>]" && return 1
+  [[ -z "${args[1]}" ]] && log.hint "stop <container> [--timeout <second>]" && return 1
 
   if docker ps --filter "name=${args[1]}" --filter "status=running" --format '{{.Names}}' | grep -wq "${args[1]}"; then
-    log.info "Shutdown after ${params[time]:-1} seconds."
-    if docker stop --time=${params[time]:-1} ${args[1]} > /tmp/${args[1]}.stop.log; then
+    log.info "Shutdown after ${params[timeout]:-1} seconds."
+    if docker stop --time=${params[timeout]:-1} ${args[1]} > /tmp/${args[1]}.stop.log; then
         log.done "Stopped: ${args[1]}"
     else
         log.error "${args[1]} stop process faild."

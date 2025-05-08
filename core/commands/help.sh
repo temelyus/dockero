@@ -11,7 +11,7 @@ Usage 🪬 :"
 
 log.sub "dockero run      ${YELLOW}<name> [<image>]                 ${RESET_COLOR}Run an existing container or create a new one."
 log.sub "dockero list     ${YELLOW}[img | --img <name>]             ${RESET_COLOR}List containers or images."
-log.sub "dockero stop     ${YELLOW}<container> [--time <seconds>]   ${RESET_COLOR}Stop a container with an optional delay."
+log.sub "dockero stop     ${YELLOW}<container> [--timeout <seconds>]   ${RESET_COLOR}Stop a container with an optional delay."
 log.sub "dockero setup    ${YELLOW}<project-path>                   ${RESET_COLOR}Set up a containerized environment for a project. (.dockero)"
 log.sub "dockero start    ${YELLOW}<container> [-c <command>]       ${RESET_COLOR}Start a container, optionally with a custom command."
 log.sub "dockero export   ${YELLOW}<container-name>                 ${RESET_COLOR}Export a container as a .tar archive to \$HOME."
@@ -95,7 +95,7 @@ echo "
 💠 dockero stop <container-name>
   🔹 Gracefully stop an existing container.
 
-💠 dockero stop <container-name> --time <seconds>
+💠 dockero stop <container-name> --timeout <seconds>
   🔹 Stop a container after a specified delay in seconds.
 "
 }
