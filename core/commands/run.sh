@@ -3,7 +3,7 @@
 run() {
 
   [[ -z "${args[1]}" ]] && log.hint "run <name> [<image>]" && return 1
-  [[ -n ${params[@]} ]] && log.warn "run command cannot accept parameters!" && return 1
+  [[ -n ${params[*]} ]] && log.warn "run command cannot accept parameters!" && return 1
 
   container_name=${args[1]}
   image_name=${args[2]:-"${args[1]}"}

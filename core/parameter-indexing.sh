@@ -18,11 +18,6 @@ while [[ $# -gt 0 ]]; do
       params["$key"]="$2"
       shift 2
       ;;
-    -cmd|-time) # Block -- instead of using -
-      key="${1##--}"
-      params["$key"]="false"
-      shift
-      ;;
     -*) # Dynamic Named
       key="${1##-}"
       params["$key"]="true"

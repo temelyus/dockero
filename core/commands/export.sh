@@ -1,6 +1,4 @@
 export() {
-set -e
-
 # === INPUT VALIDATION ===
 if [[ ! -n "${args[1]}" ]]; then
   log.hint "Usage: $0 export <container-name>"
@@ -23,7 +21,7 @@ build_name="${container_name}.tar"
 
 # === LOGGING ===
 echo "🔧 Container       : ${container_name}"
-echo "📦 Image Name      : ${USER}-${container_name}"
+echo "📦 Image Name      : ${container_name}"
 echo "📁 Virtual Path    : ${host_path}:/workspace"
 echo "🏗️  Build Name      : ${build_name}"
 
@@ -31,7 +29,7 @@ echo "🏗️  Build Name      : ${build_name}"
 
 log.info "Initiating container export with major versioning scheme..."
 
-base_image="${USER}-${container_name}"
+base_image="${container_name}"
 commit_log="/tmp/export.${container_name}.log"
 
 # Fetch all image tags in the format v<number>

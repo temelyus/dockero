@@ -1,18 +1,35 @@
 remove() {
-  local targets=("${full_arr[@]:1}")
+  local input="${args[1]}"
 
-  if [[ ${#targets[@]} -eq 0 ]]; then
-    log.hint "Usage: remove <container|image> [additional]"
+  if [[ -z "$input" ]]; then
+    log.hint "Usage: remove <container|image>[:tag]"
     return 1
   fi
 
-  for target in "${targets[@]}"; do
-    if docker ps -a --format '{{.Names}}' | grep -q "^$target$"; then
-      docker rm -f "$target" && log.done "Removed container: $target" || log.warn "Failed to remove container: $target"
-    elif docker images --format '{{.Repository}}' | grep -q "^$target$"; then
-      docker rmi -f "$target" && log.done "Removed image: $target" || log.warn "Failed to remove image: $target"
+  # Parse target and tag
+  local name="${input%%:*}"
+  local tag="${input#*:}"
+  [[ "$input" == "$tag" ]] && tag="latest"
+
+  local target="$name:$tag"
+
+  # Check for container first
+  if docker ps -a --format '{{.Names}}' | grep -q "^$name$"; then
+    if docker rm -f "$name" > /dev/null 2>&1; then
+      log.done "Removed container $name"
     else
-      log.error "Target not found: $target"
+      log.warn "Failed to remove container $name"
     fi
-  done
+    return
+  # Check for image next
+  elif docker images --format '{{.Repository}}:{{.Tag}}' | grep -q "^$target$"; then
+    if docker rmi -f "$target" > /dev/null 2>&1; then
+      log.done "Removed image $target"
+    else
+      log.warn "Failed to remove image $target"
+    fi
+    return
+  fi
+
+  log.error "Target not found: $input"
 }
