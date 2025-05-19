@@ -10,7 +10,7 @@ echo "
 Usage 🪬 :"
 
 log.sub "dockero run      ${YELLOW}<name> [<image>]                            ${RESET_COLOR}Run an existing container or create a new one."
-log.sub "dockero list     ${YELLOW}[img | --img <name>]                        ${RESET_COLOR}List containers or images."
+log.sub "dockero list     ${YELLOW}[-img]                                      ${RESET_COLOR}List containers or images."
 log.sub "dockero stop     ${YELLOW}<container> [--timeout <seconds>]           ${RESET_COLOR}Stop a container with an optional delay."
 log.sub "dockero setup    ${YELLOW}<project-path>                              ${RESET_COLOR}Set up a containerized environment for a project. (.dockero)"
 log.sub "dockero start    ${YELLOW}<container> [-c <command>]                  ${RESET_COLOR}Start a container, optionally with a custom command."
@@ -51,11 +51,8 @@ echo "
 💠 dockero list
   🔹 List all existing containers.
 
-💠 dockero list img
+💠 dockero list -img
   🔹 List all existing images.
-
-💠 dockero list --img <image-name>
-  🔹 List all containers created from the specified image.
 "
 }
 

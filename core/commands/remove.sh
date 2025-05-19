@@ -14,7 +14,7 @@ remove() {
   local target="$name:$tag"
 
   # Check for container first
-  if docker ps -a --format '{{.Names}}' | grep -q "^$name$"; then
+  if docker ps -a --format '{{.Names}}' | grep -q "^$name$" && ! [[ $input =~ ':' ]]; then
     if docker rm -f "$name" > /dev/null 2>&1; then
       log.done "Removed container $name"
     else
