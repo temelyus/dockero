@@ -9,15 +9,15 @@ help() {
 echo "
 Usage 🪬 :"
 
-log.sub "dockero run      ${YELLOW}<name> [<image>]                 ${RESET_COLOR}Run an existing container or create a new one."
-log.sub "dockero list     ${YELLOW}[img | --img <name>]             ${RESET_COLOR}List containers or images."
-log.sub "dockero stop     ${YELLOW}<container> [--timeout <seconds>]   ${RESET_COLOR}Stop a container with an optional delay."
-log.sub "dockero setup    ${YELLOW}<project-path>                   ${RESET_COLOR}Set up a containerized environment for a project. (.dockero)"
-log.sub "dockero start    ${YELLOW}<container> [-c <command>]       ${RESET_COLOR}Start a container, optionally with a custom command."
-log.sub "dockero export   ${YELLOW}<container-name>                 ${RESET_COLOR}Export a container as a .tar archive to \$HOME."
-log.sub "dockero import   ${YELLOW}</path/to/archive.tar>           ${RESET_COLOR}Import a .tar archive as a container image."
-log.sub "dockero rename   ${YELLOW}<current-name> <new-name>        ${RESET_COLOR}Rename an existing container."
-log.sub "dockero remove   ${YELLOW}<container|image> [additional]   ${RESET_COLOR}Remove a container(s) or an image(s)."
+log.sub "dockero run      ${YELLOW}<name> [<image>]                            ${RESET_COLOR}Run an existing container or create a new one."
+log.sub "dockero list     ${YELLOW}[img | --img <name>]                        ${RESET_COLOR}List containers or images."
+log.sub "dockero stop     ${YELLOW}<container> [--timeout <seconds>]           ${RESET_COLOR}Stop a container with an optional delay."
+log.sub "dockero setup    ${YELLOW}<project-path>                              ${RESET_COLOR}Set up a containerized environment for a project. (.dockero)"
+log.sub "dockero start    ${YELLOW}<container> [-c <command>]                  ${RESET_COLOR}Start a container, optionally with a custom command."
+log.sub "dockero export   ${YELLOW}<container-name>                            ${RESET_COLOR}Export a container as a .tar archive to \$HOME."
+log.sub "dockero import   ${YELLOW}</path/to/archive.tar>                      ${RESET_COLOR}Import a .tar archive as a container image."
+log.sub "dockero rename   ${YELLOW}<old-name>[:tag] <new-name>[:tag] [-img]    ${RESET_COLOR}Rename an existing container or image."
+log.sub "dockero remove   ${YELLOW}<container|image>[:tag]                     ${RESET_COLOR}Remove a container(s) or an image(s)."
 
 log.endline
 exit 0
@@ -63,6 +63,9 @@ help-rename(){
 echo "
 💠 dockero rename <current-name> <new-name>
   🔹 Rename an existing container.
+  
+💠 dockero rename <image-name:tag> <new-name:tag> -img
+  🔹 Rename an existing image.
 "
 }
 
@@ -143,7 +146,7 @@ EOF
 
 help-remove(){
 echo "
-💠 dockero remove <container-or-image>
+💠 dockero remove <container-or-image>[:tag]
   🔹 Remove a specified container or image.
 "
 }
