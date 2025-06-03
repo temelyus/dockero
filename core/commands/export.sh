@@ -25,31 +25,18 @@ echo "📦 Image Name      : ${container_name}"
 echo "📁 Virtual Path    : ${host_path}:/workspace"
 echo "🏗️  Build Name      : ${build_name}"
 
-# === VERSIONED BUILD EXECUTION (vX Format) ===
+# === BUILD EXECUTION ===
 
 log.info "Initiating container export with major versioning scheme..."
 
 base_image="${container_name}"
 commit_log="/tmp/export.${container_name}.log"
 
-# Fetch all image tags in the format v<number>
-existing_versions=$(docker images --format "{{.Repository}}:{{.Tag}}" \
-    | grep "^${base_image}:" \
-    | grep -Eo 'v[0-9]+' \
-    | sort -V)
 
-if [[ -z "$existing_versions" ]]; then
-    next_version="v1"
-else
-    last_version=$(echo "$existing_versions" | tail -n 1)
-    version_number=${last_version#v}
-    next_version="v$((version_number + 1))"
-fi
+commit_image="${base_image}:latest"
+export_path="${HOME}/${container_name}.tar"
 
-commit_image="${base_image}:${next_version}"
-export_path="${HOME}/${container_name}-${next_version}.tar"
-
-log.sub "Resolved image version: ${next_version}"
+log.sub "Resolved image version: latest"
 
 # Commit the container
 if ! docker commit "$container_name" "$commit_image" 2> "$commit_log"; then

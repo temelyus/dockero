@@ -1,4 +1,4 @@
-<img width="96" align="right" src="https://temelyus.github.io/images/dockero.png" alt="ICON">
+<img width="96" align="right" src="https://the-abra.github.io/images/dockero.png" alt="ICON">
 
 # 🚀 Dockero – Simplified Docker CLI with Autocompletion
 
