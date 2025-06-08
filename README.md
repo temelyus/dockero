@@ -60,6 +60,11 @@ To make it permanent, add that line to your `~/.bashrc`.
 
 ---
 
+## 📹 Demo Cast (Asciinema)
+[![asciicast](https://asciinema.org/a/lNWGYJZoiDXjW0HljPywS88WE.svg)](https://asciinema.org/a/lNWGYJZoiDXjW0HljPywS88WE)
+
+---
+
 ## 📦 Project Setup with `.dockero`
 
 Dockero supports declarative setup via `.dockero` file placed in your project root:
