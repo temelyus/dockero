@@ -4,31 +4,31 @@
 log.setline "Dockero - V$DOCKERO_VERSION"
 echo "Dockero - Simplified Docker CLI"
 
-
-help() { 
-echo "
+help() {
+  echo "
 Usage 🪬 :"
 
-log.sub "dockero run      ${YELLOW}<name> [<image>]                            ${RESET_COLOR}Run an existing container or create a new one."
-log.sub "dockero list     ${YELLOW}[-img]                                      ${RESET_COLOR}List containers or images."
-log.sub "dockero stop     ${YELLOW}<container> [--timeout <seconds>]           ${RESET_COLOR}Stop a container with an optional delay."
-log.sub "dockero setup    ${YELLOW}<project-path>                              ${RESET_COLOR}Set up a containerized environment for a project. (.dockero)"
-log.sub "dockero start    ${YELLOW}<container> [-c <command>]                  ${RESET_COLOR}Start a container, optionally with a custom command."
-log.sub "dockero export   ${YELLOW}<container-name>                            ${RESET_COLOR}Export a container as a .tar archive to \$HOME."
-log.sub "dockero import   ${YELLOW}</path/to/archive.tar>                      ${RESET_COLOR}Import a .tar archive as a container image."
-log.sub "dockero rename   ${YELLOW}<old-name>[:tag] <new-name>[:tag] [-img]    ${RESET_COLOR}Rename an existing container or image."
-log.sub "dockero remove   ${YELLOW}<container|image>[:tag]                     ${RESET_COLOR}Remove a container(s) or an image(s)."
+  log.sub "dockero run      ${YELLOW}<name> [<image>]                            ${RESET_COLOR}Run an existing container or create a new one."
+  log.sub "dockero list     ${YELLOW}[-img]                                      ${RESET_COLOR}List containers or images."
+  log.sub "dockero stop     ${YELLOW}<container> [--timeout <seconds>]           ${RESET_COLOR}Stop a container with an optional delay."
+  log.sub "dockero setup    ${YELLOW}<project-path>                              ${RESET_COLOR}Set up a containerized environment for a project. (.dockero)"
+  log.sub "dockero start    ${YELLOW}<container> [-c <command>]                  ${RESET_COLOR}Start a container, optionally with a custom command."
+  log.sub "dockero export   ${YELLOW}<container-name>                            ${RESET_COLOR}Export a container as a .tar archive to \$HOME."
+  log.sub "dockero import   ${YELLOW}</path/to/archive.tar>                      ${RESET_COLOR}Import a .tar archive as a container image."
+  log.sub "dockero rename   ${YELLOW}<old-name>[:tag] <new-name>[:tag] [-img]    ${RESET_COLOR}Rename an existing container or image."
+  log.sub "dockero remove   ${YELLOW}<container|image>[:tag]                     ${RESET_COLOR}Remove a container(s) or an image(s)."
 
-log.endline
-exit 0
+  log.hint 'Check out the wiki section on the github page for more detailed information.'
+
+  log.endline
+  exit 0
 }
 
 help-() { help && exit 0; }
 help-help() { help && exit 0; }
 
-
 help-run() {
-echo "
+  echo "
 💠 dockero run <name>
   🔹 Launch an existing container by <name>.
   🔹 If the container is not found, create a new container using <name> as both the image and container name.
@@ -43,11 +43,11 @@ echo "
     🔸 DISPLAY environment variable for GUI support
     🔸 /dev/snd device access for audio output (if available)
 "
-exit 0
+  exit 0
 }
 
-help-list(){
-echo "
+help-list() {
+  echo "
 💠 dockero list
   🔹 List all existing containers.
 
@@ -56,8 +56,8 @@ echo "
 "
 }
 
-help-rename(){
-echo "
+help-rename() {
+  echo "
 💠 dockero rename <current-name> <new-name>
   🔹 Rename an existing container.
   
@@ -66,22 +66,22 @@ echo "
 "
 }
 
-help-export(){
-echo "
+help-export() {
+  echo "
 💠 dockero export <container-name>
   🔹 Export an existing container as a .tar archive to $HOME.
 "
 }
 
-help-import(){
-echo "
+help-import() {
+  echo "
 💠 dockero import </path/to/archive.tar>
   🔹 Import a .tar archive as a new image.
 "
 }
 
-help-start(){
-echo "
+help-start() {
+  echo "
 💠 dockero start <container-name>
   🔹 Start an existing container.
 
@@ -90,8 +90,8 @@ echo "
 "
 }
 
-help-stop(){
-echo "
+help-stop() {
+  echo "
 💠 dockero stop <container-name>
   🔹 Gracefully stop an existing container.
 
@@ -101,7 +101,7 @@ echo "
 }
 
 help-setup() {
-cat <<EOF
+  cat <<EOF
 
 🔧 Dockero Setup Utility
 
@@ -122,28 +122,16 @@ Usage:
    ▸ Defaults to '\$PWD:/workspace' if not explicitly specified.  
    ▸ Optional.
 
-📌 Example Configuration:
-
-[default]  
-name = mynginx  
-image = nginx:alpine  
-command = nginx -g 'daemon off;'  
-restart_policy = always  
-
-[volumes]  
-env = ./nginx:/usr/share/nginx/html  
-port = 8080:80  
-
-[user]  
-name = root  
+📌 Example Configuration and Usage  
+   ▸ Check out the wiki section on the github page for more detailed information.
 
 EOF
 }
 
-
-help-remove(){
-echo "
+help-remove() {
+  echo "
 💠 dockero remove <container-or-image>[:tag]
   🔹 Remove a specified container or image.
 "
 }
+
